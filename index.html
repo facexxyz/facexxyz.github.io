@@ -224,8 +224,17 @@
 
 
             
+                <div class="entry pink-link-context">
+                    <p>转载请注明出处：<a href="http://www.facex.xyz">www.facex.xyz</a></p>
+<h3 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h3><p>项目中遇到这样的一个需求：分别需要对发送的数据和接受的数据做编码和解码处理，且不同的设备编码和解码方式不同。<br>一般写法是用if-else或者switch-case对设备进行判断，然后根据不同的设备选择相应的编码和解码方式。但是这种方法耦合性高，不易维护，增加设备的支持就需要修改原先的代码，这容易在原本正确的代码中引入新的错误，这也违背了开闭原则。<br>对于这种情况，一种较好的解决方式就是策略模式。<br>
+                </div>
+            
         </div>
 
+        
+        <div class="card-action pink-link-context">
+            <a href="/2016/12/05/设计模式之策略模式/">READ MORE</a>
+        </ div>
         
     </div>
 </article>
@@ -264,18 +273,29 @@
     <div class="container">
         <div class="row">
             
-            <div class="social-group col m3 s12">
+            <div class="social-group col m4 s12">
                 <h5 class="white-text">社交</h5>
                 
                     <a class="social-link" href="https://github.com/facexxyz" target="_blank">
                         <i class="fa fa-2x fa-github"></i>
                     </a>
                 
+                <div class="site-visitors-container white-text">
+                    <span>
+                        <i class="fa fa-user"></i>
+                        <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+                    </span>
+                    <span>&nbsp;|&nbsp;</span>
+                    <span>
+                        <i class="fa fa-eye"></i>
+                        <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+                    </span>
+                </div>
             </div>
             
 
             
-            <div class="col m9 s12">
+            <div class="col m8 s12">
                 <h5 class="white-text">友情链接</h5>
                 
                     <a class="social-link" href="http://www.facex.xyz" target="_blank">本博客地址</a>
@@ -307,6 +327,8 @@
 
 <script src="/js/jquery.min.js"></script>
 <script src="/js/materialize.min.js"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
 
 <script>
     (function($) {
