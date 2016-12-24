@@ -9,8 +9,12 @@
       <content type="html"><![CDATA[<p>最近在做一款跑步机的APP，需求是在地图上选定起点和终点，然后根据跑步机上设定的速度模拟用户在地图上沿着起点至终点运动。一般的地图开发，实时位置可通过手机GPS获取，然而本项目用户在跑步机上运动，用户在地图上的位置要根据跑步机设定的速度来模拟。对比了下百度，高德和腾讯地图，冲着高德地图的Demo和文档比较齐全，项目中选定高德地图作为地图开发。<br><a id="more"></a></p>
 <p><strong>转载请注明出处：<a href="http://www.facex.xyz" target="_blank" rel="external">www.facex.xyz</a>，如有发现错误或有其他更好的实现方式可与我联系。</strong></p>
 <blockquote>
-<p>意外发现高德3D地图在12月9日更新了<strong>点平滑移动</strong>的api，细看之下非常符合本次需要，感谢高德开发人员，不然有得折腾了！</p>
-<p>下文中的<strong>点</strong>指代用户在地图中的位置。</p>
+<ul>
+<li><p>意外发现高德3D地图在12月9日更新了<strong>点平滑移动</strong>的api，细看之下非常符合本次需要，感谢高德开发人员，不然有得折腾了！</p>
+</li>
+<li><p>下文中的<strong>点</strong>指代用户在地图中的位置。</p>
+</li>
+</ul>
 </blockquote>
 <p>开撸之前，先上无码图。</p>
 <p><img src="http://ohnwilkou.bkt.clouddn.com/SimulateRunning.gif" alt="SimulateRunning"></p>
