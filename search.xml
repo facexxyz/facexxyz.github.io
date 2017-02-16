@@ -6,7 +6,7 @@
     <entry>
       <title><![CDATA[Java List对对碰]]></title>
       <url>http://yoursite.com/2017/02/16/Java%20List%E5%AF%B9%E5%AF%B9%E7%A2%B0/</url>
-      <content type="html"><![CDATA[<p>Java对两个list集合的数据处理情况非常常见，若处理得当，可大大提高开发效率，本文介绍两个List之间如何做数据处理。</p>
+      <content type="html"><![CDATA[<p>Java对两个list集合的数据处理情况可谓非常常见，若处理得当，可大大提高开发效率。</p>
 <a id="more"></a>
 <p><strong>转载请注明出处：<a href="http://www.facex.xyz" target="_blank" rel="external">www.facex.xyz</a>，如有发现错误或有其他更好的实现方式可与我联系。</strong></p>
 <h3 id="1-相关方法"><a href="#1-相关方法" class="headerlink" title="1. 相关方法"></a>1. 相关方法</h3><p>文章开始，我们先介绍几个对两个List的数据处理相关的方法，以下解释来自Java官方注释。</p>
@@ -32,9 +32,10 @@
     <entry>
       <title><![CDATA[我常用的Android第三方框架]]></title>
       <url>http://yoursite.com/2017/02/16/%E6%88%91%E5%B8%B8%E7%94%A8%E7%9A%84Android%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/</url>
-      <content type="html"><![CDATA[<p>前辈总是说“不要重复造轮子，居然这个问题已经有人很好地解决了，为什么不使用呢？”<br>本文主要记录我在开发中常用的Android第三方开源框架。</p>
+      <content type="html"><![CDATA[<p>前辈总是说：不要重复造轮子，居然这个问题已经有人很好地解决了，为什么不使用呢？</p>
 <a id="more"></a>
 <p><strong>转载请注明出处：<a href="http://www.facex.xyz" target="_blank" rel="external">www.facex.xyz</a>，如有发现错误或有其他更好的实现方式可与我联系。</strong></p>
+<p>以下是我常用的Android第三方框架。</p>
 <h3 id="1-Retrofit（网络）"><a href="#1-Retrofit（网络）" class="headerlink" title="1. Retrofit（网络）"></a>1. <a href="https://github.com/square/retrofit" target="_blank" rel="external">Retrofit</a>（网络）</h3><p>Type-safe HTTP client for Android and Java by Square, Inc.</p>
 <h3 id="2-butterknife（视图绑定）"><a href="#2-butterknife（视图绑定）" class="headerlink" title="2. butterknife（视图绑定）"></a>2. <a href="https://github.com/JakeWharton/butterknife" target="_blank" rel="external">butterknife</a>（视图绑定）</h3><p>Bind Android views and callbacks to fields and methods</p>
 <h3 id="3-glide（图片加载）"><a href="#3-glide（图片加载）" class="headerlink" title="3. glide（图片加载）"></a>3. <a href="https://github.com/bumptech/glide" target="_blank" rel="external">glide</a>（图片加载）</h3><p>An image loading and caching library for Android focused on smooth scrolling</p>
