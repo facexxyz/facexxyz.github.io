@@ -1,0 +1,694 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+
+    <title>FileProvider（译） | facexxyz技术博客</title>
+    <meta name="author" content="facexxyz">
+    
+    <meta name="description" content="FileProvider 是 ContentProvider 的一个特殊子类，通过为一个文件创建一个 content:// Uri 代替 file:/// Uri 在 app 之间安全地分享文件。">
+    
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta property="og:title" content="FileProvider（译）"/>
+    <meta property="og:site_name" content="facexxyz技术博客"/>
+
+    
+    <meta property="og:image" content="undefined"/>
+    
+
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="alternate" href="/atom.xml" title="facexxyz技术博客" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/lib/materialize.min.css">
+    <link rel="stylesheet" href="/css/lib/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+    
+        <link rel="stylesheet" href="/css/lib/prettify-tomorrow-night-eighties.css" type="text/css">
+    
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+
+
+<body>
+    <img src="/weixin_favicon.png" style="position: absolute; left: -9999px; opacity: 0; filter: alpha(opacity=0);">
+
+    <nav class="indigo">
+    <div class="nav-wrapper">
+        <a href="#" data-activates="main-menu" class="button-collapse">
+            <i class="fa fa-navicon"></i>
+        </a>
+        <div class="">
+            <a href="/" class="brand-logo hide-on-med-and-down">facexxyz技术博客</a>
+            <ul class="right hide-on-med-and-down">
+                
+                    <li>
+                        <a class="menu-home " href="/" >
+                            <i class="fa fa-home "></i>
+                            
+                            首页
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-archive " href="/archives" >
+                            <i class="fa fa-archive "></i>
+                            
+                            归档
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                            <i class="fa fa-bookmark "></i>
+                            
+                            分类
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-about " href="/about" >
+                            <i class="fa fa-user "></i>
+                            
+                            关于
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-search modal-trigger " href="#search" >
+                            <i class="fa fa-search "></i>
+                            
+                            搜索
+                        </a>
+                    </li>
+                
+            </ul>
+            <div>
+    <ul class="side-nav indigo darken-1" id="main-menu">
+        
+        <li class="side-user">
+            <div class="row">
+                <div class="col s4 no-padding">
+                    <img class="avatar-image circle responsive-img" src="http://ohnwilkou.bkt.clouddn.com/blog_about_avatar.png" alt="User Avatar">
+                </div>
+                <div class="info col s8 valign-wrapper no-padding">
+                    <div class="valign">
+                        <p class="name">facexxyz</p>
+                        <p class="desc">Android</p>
+                    </div>
+                </div>
+            </div>
+        </li>
+        
+
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-home " href="/" >
+                    <i class="fa fa-home "></i>
+                    
+                    首页
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-archive " href="/archives" >
+                    <i class="fa fa-archive "></i>
+                    
+                    归档
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                    <i class="fa fa-bookmark "></i>
+                    
+                    分类
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-about " href="/about" >
+                    <i class="fa fa-user "></i>
+                    
+                    关于
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-search modal-trigger " href="#search" >
+                    <i class="fa fa-search "></i>
+                    
+                    搜索
+                </a>
+            </li>
+        
+    </ul>
+
+    <ul class="side-nav indigo darken-1" id="category-menu">
+    
+
+            
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/工具/">
+                    工具 <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Java/">
+                    Java <span class="right">2 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/Java/设计模式/">
+                    设计模式 <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/Java/数据结构/">
+                    数据结构 <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Android/">
+                    Android <span class="right">3 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/Android/小技巧/">
+                    小技巧 <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/Android/地图/">
+                    地图 <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/Android/官方文档-译/">
+                    官方文档-译 <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+    </ul>
+</div>
+
+        </div>
+    </div>
+</nav>
+
+<div id="search" class="modal search-modal">
+    <div class="row">
+        <div class="input-field col s12">
+              <input id="search-input" type="text">
+              <label for="search-input">搜索</label>
+        </div>
+
+    </div>
+    <div id="search-result" class="search-result col s12">
+
+    </div>
+</div>
+
+
+    <main>
+        <div class="container main-container">
+    <nav class="page-nav hide-on-small-only">
+    <div class="nav-wrapper indigo">
+        <span class="breadcrumb">当前位置（分类目录）</span>
+        
+            
+    
+    
+    <a class="breadcrumb" href="/categories/Android/">Android</a><a class="breadcrumb" href="/categories/Android/官方文档-译/">官方文档 (译)</a>
+
+
+        
+
+        
+    </div>
+</nav>
+
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>FileProvider（译）</h1>
+    
+
+
+            </div>
+            <time class="pink-link-context" datetime="2017-03-04T10:05:40.945Z"><a href="/2017/03/04/FileProvider/">2017-03-04</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+    <div class="tags-row">
+        
+            <a href="/tags/Android/" class="chip pink lighten-1">Android</a>
+        
+            <a href="/tags/翻译/" class="chip pink lighten-1">翻译</a>
+        
+            <a href="/tags/官方文档/" class="chip pink lighten-1">官方文档</a>
+        
+    </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#1-定义一个-FileProvider"><span class="section table-of-contents-text">1. 定义一个 FileProvider</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#2-指定可用的文件"><span class="section table-of-contents-text">2. 指定可用的文件</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#3-为一个文件生成-Content-URI"><span class="section table-of-contents-text">3. 为一个文件生成 Content URI</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#4-授予-URI-临时权限"><span class="section table-of-contents-text">4. 授予 URI 临时权限</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#5-向其它-App-提供-content-URI"><span class="section table-of-contents-text">5. 向其它 App 提供 content URI</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#6-更多"><span class="section table-of-contents-text">6. 更多</span></a></li></ol>
+</div>
+
+
+            <div class="entry pink-link-context">
+                <p>FileProvider 是 <a href="https://developer.android.com/reference/android/content/ContentProvider.html" target="_blank" rel="external">ContentProvider</a> 的一个特殊子类，通过为一个文件创建一个 <code>content://</code> <a href="https://developer.android.com/reference/android/net/Uri.html" target="_blank" rel="external">Uri</a> 代替 <code>file:///</code> <a href="https://developer.android.com/reference/android/net/Uri.html" target="_blank" rel="external">Uri</a> 在 app 之间安全地分享文件。</p>
+<a id="more"></a>
+<blockquote>
+<ul>
+<li>转载请注明出处：<a href="http://www.facex.xyz/FileProvider（译）" target="_blank" rel="external">http://www.facex.xyz/FileProvider（译）</a></li>
+<li>本文为 Android 官方文档中文翻译，因水平有限，如有翻译不当，望指教。</li>
+<li>原文地址： <a href="https://developer.android.com/reference/android/support/v4/content/FileProvider.html" target="_blank" rel="external">FileProvider</a></li>
+</ul>
+</blockquote>
+<p>FileProvider 是 <a href="https://developer.android.com/reference/android/content/ContentProvider.html" target="_blank" rel="external">ContentProvider</a> 的一个特殊子类，通过为一个文件创建一个 <code>content://</code> <a href="https://developer.android.com/reference/android/net/Uri.html" target="_blank" rel="external">Uri</a> 代替 <code>file:///</code> <a href="https://developer.android.com/reference/android/net/Uri.html" target="_blank" rel="external">Uri</a> 在 app 之间安全地分享文件。</p>
+<p>一个 content URI 允许你授予使用临时的读写权限去访问文件，当你创建一个包含 content URI 的 <a href="https://developer.android.com/reference/android/content/Intent.html" target="_blank" rel="external">Intent</a> 时，为了向 client app 发送 content URI ，你也可以调用 <a href="https://developer.android.com/reference/android/content/Intent.html#setFlags(int)" target="_blank" rel="external">Intent.setFlags()</a> 来添加权限。只要接收 content URI 的 <a href="https://developer.android.com/reference/android/app/Activity.html" target="_blank" rel="external">Activity</a> 是活动的，这些权限对 client app 就是可用的。对于一个跳转 <a href="https://developer.android.com/reference/android/app/Service.html" target="_blank" rel="external">Service</a> 的 <a href="https://developer.android.com/reference/android/content/Intent.html" target="_blank" rel="external">Intent</a>，只要 <a href="https://developer.android.com/reference/android/app/Service.html" target="_blank" rel="external">Service</a> 是运行的，这些权限就是可用的。</p>
+<p>相比之下，为了控制访问一个 file:/// <a href="https://developer.android.com/reference/android/net/Uri.html" target="_blank" rel="external">Uri</a> 你必须修改底层文件的文件系统权限, 这样你提供的这些权限对任何 app 就都是可用的，而且保持有效直到你修改了它们。这个级别的访问从根本上是不安全的。</p>
+<p>content URI 提供的更高的访问安全级别使 FileProvider 成为 Android 安全基础设施的关键部分。</p>
+<p>FileProvider 概述包含以下几个主题：</p>
+<ol>
+<li>定义一个 FileProvider</li>
+<li>指定可用文件</li>
+<li>检索文件的 content URI</li>
+<li>授予 URI 临时权限</li>
+<li>向其它 App 提供 content URI</li>
+</ol>
+<h3 id="1-定义一个-FileProvider"><a href="#1-定义一个-FileProvider" class="headerlink" title="1. 定义一个 FileProvider"></a>1. 定义一个 FileProvider</h3><p>由于 FileProvider 的默认功能包含为文件生成 content URI，你不需要在代码中定义一个子类，相反的，你可以通过完全使用 XML 来在你的 app 中包含 FileProvider，通过在你的 app manifest 中添加 <a href="https://developer.android.com/guide/topics/manifest/provider-element.html" target="_blank" rel="external"><provider></provider></a> 元素来指定 FileProvider 组件本身。设置 <code>android:name</code> 属性为 <code>android.support.v4.content.FileProvider</code>，设置 <code>android:authorities</code> 属性为基于你控制的域名的 URI 权限。例如，如果你拥有 mydomain.com 的控制权，你应该使用权限 <code>com.mydomain.fileprovider</code>，设置 <code>android:exported</code> 属性为 <code>false</code>, FileProvider 不需要设置为 public。设置 <a href="https://developer.android.com/guide/topics/manifest/provider-element.html#gprmsn" target="_blank" rel="external">android:grantUriPermissions</a> 为 <code>true</code> 来允许你授予一个文件临时访问。例如：<br> <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"> <span class="tag">&lt;<span class="name">manifest</span>&gt;</span></div><div class="line">    ...</div><div class="line">    <span class="tag">&lt;<span class="name">application</span>&gt;</span></div><div class="line">        ...</div><div class="line">        <span class="tag">&lt;<span class="name">provider</span></span></div><div class="line">            <span class="attr">android:name</span>=<span class="string">"android.support.v4.content.FileProvider"</span></div><div class="line">            <span class="attr">android:authorities</span>=<span class="string">"com.mydomain.fileprovider"</span></div><div class="line">            <span class="attr">android:exported</span>=<span class="string">"false"</span></div><div class="line">            <span class="attr">android:grantUriPermissions</span>=<span class="string">"true"</span>&gt;</div><div class="line">            ...</div><div class="line">        <span class="tag">&lt;/<span class="name">provider</span>&gt;</span></div><div class="line">        ...</div><div class="line">    <span class="tag">&lt;/<span class="name">application</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">manifest</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>如果你想重写任何 FileProvider 方法的默认行为，继承 FileProvider 类，并在 <code>&lt;provider&gt;</code> 元素的 <code>android:name</code> 属性中使用完整 (fully-qualified) 的类名。</p>
+<h3 id="2-指定可用的文件"><a href="#2-指定可用的文件" class="headerlink" title="2. 指定可用的文件"></a>2. 指定可用的文件</h3><p>一个 FileProvider 只能为你事先指定的目录下的文件生成一个 content URI。要指定目录，可以在 XML 中使用 <code>&lt;paths&gt;</code> 元素的子元素来指定它的存储区域和路径，例如，以下 <code>paths</code> 元素告诉 FileProvider 你想为你的私人文件区域 <code>images/</code> 的子目录请求 content URIs。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">paths</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">files-path</span> <span class="attr">name</span>=<span class="string">"my_images"</span> <span class="attr">path</span>=<span class="string">"images/"</span>/&gt;</span></div><div class="line">    ...</div><div class="line"><span class="tag">&lt;/<span class="name">paths</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p><code>&lt;paths&gt;</code> 元素必须包含一个或多个以下子元素。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">files-path</span> <span class="attr">name</span>=<span class="string">"name"</span> <span class="attr">path</span>=<span class="string">"path"</span> /&gt;</span></div></pre></td></tr></table></figure></p>
+<p>表示你的 app 的内部存储区域 <code>files/</code> 子目录中的文件。这个子目录的地址和 <a href="https://developer.android.com/reference/android/content/Context.html#getFilesDir()" target="_blank" rel="external">Context.getFilesDir()</a> 返回的值一致。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">cache-path</span> <span class="attr">name</span>=<span class="string">"name"</span> <span class="attr">path</span>=<span class="string">"path"</span> /&gt;</span></div></pre></td></tr></table></figure></p>
+<p>表示你的 app 的内部存储区域缓存子目录中的文件。这个子目录的根路径的地址和 <a href="https://developer.android.com/reference/android/content/Context.html#getCacheDir()" target="_blank" rel="external">getCacheDir()</a> 返回的值一致。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">external-path</span> <span class="attr">name</span>=<span class="string">"name"</span> <span class="attr">path</span>=<span class="string">"path"</span> /&gt;</span></div></pre></td></tr></table></figure></p>
+<p>表示外部存储区域跟目录中的文件。这个子目录的根路径的地址和 <a href="https://developer.android.com/reference/android/os/Environment.html#getExternalStorageDirectory()" target="_blank" rel="external">Environment.getExternalStorageDirectory()</a> 返回的值一致。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">external-files-path</span> <span class="attr">name</span>=<span class="string">"name"</span> <span class="attr">path</span>=<span class="string">"path"</span> /&gt;</span></div></pre></td></tr></table></figure></p>
+<p>表示你的 app 的外部存储区域根目录中的文件。这个子目录的根路径的地址和 <code>Context#getExternalFilesDir(String)</code> <code>Context.getExternalFilesDir(null)</code> 返回的值一致。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">external-cache-path</span> <span class="attr">name</span>=<span class="string">"name"</span> <span class="attr">path</span>=<span class="string">"path"</span> /&gt;</span></div></pre></td></tr></table></figure></p>
+<p>表示你的 app 的外部缓存区域根目录中的文件。这个子目录的根路径的地址和 <a href="https://developer.android.com/reference/android/content/Context.html#getExternalCacheDir()" target="_blank" rel="external">Context.getExternalCacheDir()</a> 返回的值一致。</p>
+<p>这些子元素都使用了相同的属性：</p>
+<p><code>name=&quot;name&quot;</code></p>
+<p>一个 URI 路径片段。为了加强安全性，这个值隐藏了你所分享的子目录的名字。这个值的子目录名字包含在 <code>path</code> 属性中。</p>
+<p><code>path=&quot;path&quot;</code></p>
+<p>你分享的子目录。虽然 <code>name</code> 属性是一个 URI 路径片段，但是 <code>path</code> 的值才是真正的子目录名子。注意这个值指的是一个 <strong> 子目录 </strong>，不是一个单独的文件。你不能通过它的文件名共享单个的文件，也不能使用通配符指定一个文件子集。<br>你必须为每个包含你想要 content URIs 的文件的目录指定一个 <code>&lt;paths&gt;</code> 子元素, 例如，下面 XML 元素指定两个目录：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">paths</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">files-path</span> <span class="attr">name</span>=<span class="string">"my_images"</span> <span class="attr">path</span>=<span class="string">"images/"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">files-path</span> <span class="attr">name</span>=<span class="string">"my_docs"</span> <span class="attr">path</span>=<span class="string">"docs/"</span>/&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">paths</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>将 <code>&lt;paths&gt;</code> 元素和它的子元素放入你的项目的 XML 文件中，例如，你可以将它们添加到叫做 <code>res/xml/file_paths.xml</code> 的新文件中。要够链接这个文件到 FileProvider，添加一个 <a href="https://developer.android.com/guide/topics/manifest/meta-data-element.html" target="_blank" rel="external"><meta-data></meta-data></a> 元素作为定义 FileProvider 的 <code>&lt;provider&gt;</code> 元素的子元素。设置 <code>&lt;meta-data&gt;</code> 元素的 “android:name” 属性为 <code>android.support.FILE_PROVIDER_PATHS</code>。设置元素的 “android:resource” 属性为 <code>@xml/file_paths</code>(注意不要指定 <code>.xml</code> 扩展名)。例如：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">provider</span></span></div><div class="line">    <span class="attr">android:name</span>=<span class="string">"android.support.v4.content.FileProvider"</span></div><div class="line">    <span class="attr">android:authorities</span>=<span class="string">"com.mydomain.fileprovider"</span></div><div class="line">    <span class="attr">android:exported</span>=<span class="string">"false"</span></div><div class="line">    <span class="attr">android:grantUriPermissions</span>=<span class="string">"true"</span>&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">meta-data</span></span></div><div class="line">        <span class="attr">android:name</span>=<span class="string">"android.support.FILE_PROVIDER_PATHS"</span></div><div class="line">        <span class="attr">android:resource</span>=<span class="string">"@xml/file_paths"</span> /&gt;</div><div class="line"><span class="tag">&lt;/<span class="name">provider</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<h3 id="3-为一个文件生成-Content-URI"><a href="#3-为一个文件生成-Content-URI" class="headerlink" title="3. 为一个文件生成 Content URI"></a>3. 为一个文件生成 Content URI</h3><p>要使用 Content URI 与其它 app 共享文件，你的 app 必须生成一个 Content URI。为了生成一个 Content URI，为这个文件创建一个 <a href="https://developer.android.com/reference/java/io/File.html" target="_blank" rel="external">File</a>，然后将这个 <a href="https://developer.android.com/reference/java/io/File.html" target="_blank" rel="external">File</a> 传入 <a href="https://developer.android.com/reference/android/support/v4/content/FileProvider.html#getUriForFile(android.content.Context,java.lang.String,java.io.File)" target="_blank" rel="external">getUriForFile()</a>，你可以通过 <a href="https://developer.android.com/reference/android/content/Intent.html" target="_blank" rel="external">Intent</a> 发送 <a href="https://developer.android.com/reference/android/support/v4/content/FileProvider.html#getUriForFile(android.content.Context,java.lang.String,java.io.File)" target="_blank" rel="external">getUriForFile()</a> 返回的 Content URI 到其它 app。收到这个 Content URI 的 clent app 可以通过调用 <a href="https://developer.android.com/reference/android/content/ContentResolver.html#openFileDescriptor(android.net.Uri,java.lang.String)" target="_blank" rel="external">ContentResolver.openFileDescriptor</a> 获取的 <a href="https://developer.android.com/reference/android/os/ParcelFileDescriptor.html" target="_blank" rel="external">ParcelFileDescriptor</a> 来打开文件和访问里边的内容。<br>例如，假设你的 app 正在通过 authority 为 <code>com.mydomain.fileprovider</code> 的 FileProvider 为其他 app 提供文件。要获取在内部存储 <code>images/</code> 子目录下的 <code>default_image.jpg</code> 文件的 content URI，添加如下代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">File imagePath = <span class="keyword">new</span> File(Context.getFilesDir(), <span class="string">"images"</span>);</div><div class="line">File newFile = <span class="keyword">new</span> File(imagePath, <span class="string">"default_image.jpg"</span>);</div><div class="line">Uri contentUri = getUriForFile(getContext(), <span class="string">"com.mydomain.fileprovider"</span>, newFile);</div></pre></td></tr></table></figure></p>
+<p>作为上一个代码段的结果，<a href="https://developer.android.com/reference/android/support/v4/content/FileProvider.html#getUriForFile(android.content.Context,java.lang.String,java.io.File)" target="_blank" rel="external">getUriForFile()</a> 将返回 content URI <code>content://com.mydomain.fileprovider/my_images/default_image.jpg</code>。</p>
+<h3 id="4-授予-URI-临时权限"><a href="#4-授予-URI-临时权限" class="headerlink" title="4. 授予 URI 临时权限"></a>4. 授予 URI 临时权限</h3><p>要给 <a href="https://developer.android.com/reference/android/support/v4/content/FileProvider.html#getUriForFile(android.content.Context,java.lang.String,java.io.File)" target="_blank" rel="external">getUriForFile()</a> 返回的 content URI 授予访问权限，做下面的其中一项：</p>
+<ul>
+<li>使用期望的 mode flags 调用 <code>content:// Uri</code> 的 <a href="https://developer.android.com/reference/android/content/Context.html#grantUriPermission(java.lang.String,android.net.Uri,int)" target="_blank" rel="external">Context.grantUriPermission(package, Uri, mode_flags)</a> 方法。这将为 content URI 授予指定包的临时访问权限，根据 <code>mode_flags</code> 参数的值，你可以设置 <code>mode_flags</code> 参数的值为 <a href="https://developer.android.com/reference/android/content/Intent.html#FLAG_GRANT_READ_URI_PERMISSION" target="_blank" rel="external">FLAG_GRANT_READ_URI_PERMISSION</a>,<a href="https://developer.android.com/reference/android/content/Intent.html#FLAG_GRANT_WRITE_URI_PERMISSION" target="_blank" rel="external">FLAG_GRANT_WRITE_URI_PERMISSION</a> 或两者，这个权限将保持有效直到你调用 <a href="https://developer.android.com/reference/android/content/Context.html#revokeUriPermission(android.net.Uri,int)" target="_blank" rel="external">revokeUriPermission()</a> 来撤销它或设备重启。</li>
+<li>通过 <a href="https://developer.android.com/reference/android/content/Intent.html#setData(android.net.Uri)" target="_blank" rel="external">setData()</a> 传入 content URI 到 <a href="https://developer.android.com/reference/android/content/Intent.html" target="_blank" rel="external">Intent</a>。</li>
+<li>下一步，调用 <a href="https://developer.android.com/reference/android/content/Intent.html#setFlags(int)" target="_blank" rel="external">Intent.setFlags()</a> 传入 <a href="https://developer.android.com/reference/android/content/Intent.html#FLAG_GRANT_READ_URI_PERMISSION" target="_blank" rel="external">FLAG_GRANT_READ_URI_PERMISSION</a> 或 <a href="https://developer.android.com/reference/android/content/Intent.html#FLAG_GRANT_WRITE_URI_PERMISSION" target="_blank" rel="external">FLAG_GRANT_WRITE_URI_PERMISSION</a> 或两者。</li>
+<li>最后，发送这个 <a href="https://developer.android.com/reference/android/content/Intent.html" target="_blank" rel="external">Intent</a> 到其它 app。一般你可以通过 <a href="https://developer.android.com/reference/android/app/Activity.html#setResult(int,android.content.Intent)" target="_blank" rel="external">setResult()</a> 来做。</li>
+</ul>
+<p>只要接收 <a href="https://developer.android.com/reference/android/content/Intent.html" target="_blank" rel="external">Intent</a> 的 <a href="https://developer.android.com/reference/android/app/Activity.html" target="_blank" rel="external">Activity</a> 的堆栈处于活动状态，Intent 中被授予的权限将保持有效。当堆栈销毁时，权限将自动移除。授予一个 clent app 的任何一个 <a href="https://developer.android.com/reference/android/app/Activity.html" target="_blank" rel="external">Activity</a> 的权限将自动扩展到这个 app 的其它组件。</p>
+<h3 id="5-向其它-App-提供-content-URI"><a href="#5-向其它-App-提供-content-URI" class="headerlink" title="5. 向其它 App 提供 content URI"></a>5. 向其它 App 提供 content URI</h3><p>有很多方法可以向一个 client app 提供 content URI。一个常见的方法是 client app 通过调用 <a href="https://developer.android.com/reference/android/app/Activity.html#startActivityForResult(android.content.Intent,int,android.os.Bundle)" target="_blank" rel="external">startActivityResult()</a> 来启动你的 app，<a href="https://developer.android.com/reference/android/app/Activity.html#startActivityForResult(android.content.Intent,int,android.os.Bundle)" target="_blank" rel="external">startActivityResult()</a> 发送一个 <a href="https://developer.android.com/reference/android/content/Intent.html" target="_blank" rel="external">Intent</a> 到你的 app 来启动你的 app 中的一个 <a href="https://developer.android.com/reference/android/app/Activity.html" target="_blank" rel="external">Activity</a>。作为回应，你的 app 可以立即返回一个 content URI 给 clent app 或呈现一个用户界面允许用户选择一个文件。在后一种情况下，一旦用户先择了一个文件，你的 app 可以返回这个文件的 content URI。以上两种情况，你的 app 在通过 <a href="https://developer.android.com/reference/android/app/Activity.html#setResult(int,android.content.Intent)" target="_blank" rel="external">setResult()</a> 发送的 <a href="https://developer.android.com/reference/android/content/Intent.html" target="_blank" rel="external">Intent</a> 中返回 content URI。</p>
+<p>你也可以将 content URI 放入 <a href="https://developer.android.com/reference/android/content/ClipData.html" target="_blank" rel="external">ClipData</a> 对象，然后通过调用 <a href="https://developer.android.com/reference/android/content/Intent.html#setClipData(android.content.ClipData)" target="_blank" rel="external">Intent.setClipData()</a> 将这个对象添加到你发送给 client app 的 <a href="https://developer.android.com/reference/android/content/Intent.html" target="_blank" rel="external">Intent</a> 中。通过这种方式，你可以在 <a href="https://developer.android.com/reference/android/content/Intent.html" target="_blank" rel="external">Intent</a> 中添加多个 <a href="https://developer.android.com/reference/android/content/ClipData.html" target="_blank" rel="external">ClipData</a> 对象，每个对象都有自己的 content URI。当你调用 <a href="https://developer.android.com/reference/android/content/Intent.html#setFlags(int)" target="_blank" rel="external">Intent.setFlags()</a> 的 <a href="https://developer.android.com/reference/android/content/Intent.html" target="_blank" rel="external">Intent</a> 来设置临时的访问权限，相同的权限将被应用到所有的 content URIs。</p>
+<blockquote>
+<p>注意： <a href="https://developer.android.com/reference/android/content/Intent.html#setClipData(android.content.ClipData)" target="_blank" rel="external">Intent.setClipData()</a> 方法只支持 platform version 16 (Android 4.1) 或以上版本，如果你想和之前的版本保持兼容性，你应该每次只在 <a href="https://developer.android.com/reference/android/content/Intent.html" target="_blank" rel="external">Intent</a> 中发送一个 content URI，设置 action 为 <a href="https://developer.android.com/reference/android/content/Intent.html#ACTION_SEND" target="_blank" rel="external">ACTION_SEND</a>，并通过调用 <a href="https://developer.android.com/reference/android/content/Intent.html#setData(android.net.Uri)" target="_blank" rel="external">setData()</a> 将 URI 放入数据中。</p>
+</blockquote>
+<h3 id="6-更多"><a href="#6-更多" class="headerlink" title="6. 更多"></a>6. 更多</h3><p>要了解有关 FileProvider 的更多信息，请参阅 Android training 课程 <a href="https://developer.android.com/training/secure-file-sharing/index.html" target="_blank" rel="external">Sharing Files Securely with URIs</a>。</p>
+
+                
+
+
+<p class="pink-link-context">
+    <a href="/2017/02/16/Java List对对碰/" rel="next" title="Java List对对碰">
+    下一篇：Java List对对碰
+  </a>
+</p>
+
+
+            </div>
+			
+        </div>
+    </div>
+</article>
+
+
+
+
+    <section id="comment">
+        <div class="card">
+            <div class="card-content">
+                <!-- Duoshuo Comment BEGIN -->
+                <div class="ds-thread" data-thread-key="2017/03/04/FileProvider/" data-title="FileProvider（译）" data-url="http://yoursite.com/2017/03/04/FileProvider/"></div>
+
+                <script type="text/javascript">
+                    console.log(document.querySelector('.ds-thread'));
+                    var duoshuoQuery = {
+                        short_name: 'facexxyz'
+                    };
+                    (function() {
+                        var ds = document.createElement('script');
+                        ds.type = 'text/javascript';
+                        ds.async = true;
+                        ds.src = (document.location.protocol == 'https:'
+                            ? 'https:'
+                            : 'http:') + '//static.duoshuo.com/embed.js';
+                        ds.charset = 'UTF-8';
+                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+                    })();
+                </script>
+                <!-- Duoshuo Comment END -->
+            </div>
+        </div>
+    </section>
+
+
+
+</div>
+
+        <div class="fixed-action-btn float-sitemap">
+    <a class="btn-floating btn-large pink">
+      <i class="fa fa-caret-square-o-up"></i>
+    </a>
+    <ul>
+      <li><a class="btn-return-top btn-floating waves-effect green" title="回到顶部"><i class="fa fa-arrow-circle-o-up"></i></a></li>
+      <li><a class="btn-floating waves-effect button-collapse yellow darken-1"  data-activates="main-menu" title="menu"><i class="fa fa-navicon"></i></a></li>
+    </ul>
+  </div>
+
+    </main>
+    <footer class="page-footer indigo darken-1">
+    
+    <div class="container">
+        <div class="row">
+            
+            <div class="social-group col m4 s12">
+                <h5 class="white-text">社交</h5>
+                
+                    <a class="social-link" href="http://weibo.com/338087345" target="_blank">
+                        <i class="fa fa-2x fa-weibo"></i>
+                    </a>
+                
+                    <a class="social-link" href="https://github.com/facexxyz" target="_blank">
+                        <i class="fa fa-2x fa-github"></i>
+                    </a>
+                
+                <div class="site-visitors-container white-text">
+                    <span>
+                        <i class="fa fa-user"></i>
+                        <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+                    </span>
+                    <span>&nbsp;|&nbsp;</span>
+                    <span>
+                        <i class="fa fa-eye"></i>
+                        <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+                    </span>
+                </div>
+            </div>
+            
+
+            
+            <div class="col m8 s12">
+                <h5 class="white-text">友情链接</h5>
+                
+                    <a class="social-link" href="http://www.facex.xyz" target="_blank">facexxyz</a>
+                
+            </div>
+            
+        </div>
+    </div>
+    
+
+    <div class="footer-copyright pink-link-context">
+        <div class="container">
+            © 2017 www.facex.xyz, All rights reserved.
+            <p class="right" style="margin-top: 0;">本博客由 <a href="https://hexo.io">Hexo</a> 强力驱动 | 主题 <a href="https://github.com/raytaylorlin/hexo-theme-raytaylorism">raytaylorism</a></p>
+        </div>
+    </div>
+</footer>
+
+
+    <noscript>
+    <div class="noscript">
+        <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+    </div>
+</noscript>
+<div class="noscript">
+    <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+</div>
+
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+<script>
+    (function($) {
+        $(document).ready(function() {
+            // 隐藏禁用javascript（针对微信内置浏览器）的提示
+            $('.noscript').hide();
+
+            // 图片缩放效果
+            var $imgs = $('img').not('.slider-image').not('.avatar-image').not('.carousel-image').not('.card-cover-image').not('.qrcode');
+
+            // 给图片加上点击放大效果（materialbox插件）
+            $imgs.addClass('materialboxed').each(function(i, el) {
+                $(this).attr('data-caption', $(this).attr('alt') || ' ');
+            }).materialbox();
+
+            // 优化表格的显示
+            $('table').each(function() {
+                var $table = $(this);
+                // 除去多行代码的情况
+                if ($table.find('pre').length == 0) {
+                    $table.addClass('responsive-table striped bordered');
+                }
+            });
+
+            // 首页幻灯片
+            $('.slider').slider({indicators: true, full_width: true, interval: 8000});
+
+            $(".button-collapse").sideNav();
+            $(".category-menu").sideNav();
+
+            // 针对gallery post
+            $('.carousel').carousel({full_width: true});
+            $('.carousel-control.prev').click(function() {
+                $('.carousel').carousel('prev');
+            });
+            $('.carousel-control.next').click(function() {
+                $('.carousel').carousel('next');
+            });
+
+            // 文章目录
+            $('article').not('.simple-article').find('h1').add('h2').add('h3').add('h4').add('h5').add('h6').scrollSpy();
+            // 修正文章目录的left-border颜色
+            var color = $('.table-of-contents-text').css('color');
+            $('.table-of-contents-link').css('border-left-color', color);
+
+            // 针对移动端做的优化：FAB按钮点击一下收回
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                $('.fixed-action-btn').addClass('click-to-toggle');
+            }
+            // 回到顶部
+            $('.btn-return-top').click(function() {
+                $('body, html').animate({
+                    scrollTop: 0
+                }, 500);
+            });
+
+            // 重置读书页面的Tab标签页的颜色
+            $('li.tab a').hover(function() {
+                $(this).toggleClass('text-lighten-4');
+            });
+            $('.indicator').addClass('pink lighten-2');
+
+            
+            // 添加new标签
+            $('').append('<span class="new badge pink"></span>');
+            
+
+            // 搜索功能
+            $('.modal-trigger').leanModal({
+                // 打开搜索框时自动聚焦
+                ready: function() {
+                    if ($('#search').is(":visible")) {
+                        $('#search-input').focus();
+                    }
+                }
+            });
+            var searchXml = "search.xml";
+            if (searchXml.length == 0) {
+             	searchXml = "search.xml";
+            }
+            var searchPath = "/" + searchXml;
+            initSearch(searchPath, 'search-input', 'search-result');
+        });
+
+        // 初始化搜索与匹配函数
+        var initSearch = function(path, search_id, content_id) {
+            'use strict';
+            $.ajax({
+                url: path,
+                dataType: "xml",
+                success: function(xmlResponse) {
+                    // get the contents from search data
+                    var datas = $("entry", xmlResponse).map(function() {
+                        return {
+                            title: $("title", this).text(),
+                            content: $("content", this).text(),
+                            url: $("url", this).text()
+                        };
+                    }).get();
+                    var $input = document.getElementById(search_id);
+                    var $resultContent = document.getElementById(content_id);
+                    $input.addEventListener('input', function() {
+                        var str = '<ul class=\"search-result-list\">';
+                        var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                        $resultContent.innerHTML = "";
+                        if (this.value.trim().length <= 0) {
+                            return;
+                        }
+                        // perform local searching
+                        datas.forEach(function(data) {
+                            var isMatch = true;
+                            var content_index = [];
+                            var data_title = data.title.trim().toLowerCase();
+                            var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                            var data_url = data.url;
+                            var index_title = -1;
+                            var index_content = -1;
+                            var first_occur = -1;
+                            // only match artiles with not empty titles and contents
+                            if (data_title != '' && data_content != '') {
+                                keywords.forEach(function(keyword, i) {
+                                    index_title = data_title.indexOf(keyword);
+                                    index_content = data_content.indexOf(keyword);
+                                    if (index_title < 0 && index_content < 0) {
+                                        isMatch = false;
+                                    } else {
+                                        if (index_content < 0) {
+                                            index_content = 0;
+                                        }
+                                        if (i == 0) {
+                                            first_occur = index_content;
+                                        }
+                                    }
+                                });
+                            }
+                            // show search results
+                            if (isMatch) {
+                                keywords.forEach(function(keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    data_title = data_title.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                });
+
+                                str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                                var content = data.content.trim().replace(/<[^>]+>/g, "");
+                                if (first_occur >= 0) {
+                                    // cut out 100 characters
+                                    var start = first_occur - 20;
+                                    var end = first_occur + 80;
+                                    if (start < 0) {
+                                        start = 0;
+                                    }
+                                    if (start == 0) {
+                                        end = 100;
+                                    }
+                                    if (end > content.length) {
+                                        end = content.length;
+                                    }
+                                    var match_content = content.substring(start, end);
+                                    // highlight all keywords
+                                    keywords.forEach(function(keyword) {
+                                        var regS = new RegExp(keyword, "gi");
+                                        match_content = match_content.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                    });
+
+                                    str += "<p class=\"search-result\">..." + match_content + "...</p>"
+                                }
+                                str += "</li>";
+                            }
+                        });
+                        str += "</ul>";
+                        $resultContent.innerHTML = str;
+                    });
+                }
+            });
+        }
+    })(jQuery);
+</script>
+
+
+<script src="/js/prettify.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("pre").addClass("prettyprint");
+        prettyPrint();
+    });
+</script>
+
+
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-88069054-1', 'auto');
+    ga('send', 'pageview');
+
+</script>
+
+
+
+<script type="text/javascript" src="http://tajs.qq.com/stats?sId=60081072" charset="UTF-8"></script>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async
+  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+
+</body>
+</html>

@@ -7,15 +7,13 @@
 
     
 
-    <title>我常用的Android第三方框架 | facexxyz技术博客</title>
+    <title>翻译 | facexxyz技术博客</title>
     <meta name="author" content="facexxyz">
-    
-    <meta name="description" content="前辈总是说：不要重复造轮子，居然这个问题已经有人很好地解决了，为什么不使用呢？">
     
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <meta property="og:title" content="我常用的Android第三方框架"/>
+    
     <meta property="og:site_name" content="facexxyz技术博客"/>
 
     
@@ -29,7 +27,7 @@
     <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
 
     
-        <link rel="stylesheet" href="/css/lib/atelier-forest-light.css" type="text/css">
+        <link rel="stylesheet" href="/css/lib/prettify-tomorrow-night-eighties.css" type="text/css">
     
     <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 </head>
@@ -171,16 +169,16 @@
         
 
             <li class="collapse-level-1" collapse-level="1">
-                <a class="no-padding" href="/categories/Java/数据结构/">
-                    数据结构 <span class="right">1 篇</span></a>
+                <a class="no-padding" href="/categories/Java/设计模式/">
+                    设计模式 <span class="right">1 篇</span></a>
                 </a>
             </li>
 
         
 
             <li class="collapse-level-1" collapse-level="1">
-                <a class="no-padding" href="/categories/Java/设计模式/">
-                    设计模式 <span class="right">1 篇</span></a>
+                <a class="no-padding" href="/categories/Java/数据结构/">
+                    数据结构 <span class="right">1 篇</span></a>
                 </a>
             </li>
 
@@ -203,16 +201,16 @@
         
 
             <li class="collapse-level-1" collapse-level="1">
-                <a class="no-padding" href="/categories/Android/轮子/">
-                    轮子 <span class="right">1 篇</span></a>
+                <a class="no-padding" href="/categories/Android/地图/">
+                    地图 <span class="right">1 篇</span></a>
                 </a>
             </li>
 
         
 
             <li class="collapse-level-1" collapse-level="1">
-                <a class="no-padding" href="/categories/Android/地图/">
-                    地图 <span class="right">1 篇</span></a>
+                <a class="no-padding" href="/categories/Android/官方文档-译/">
+                    官方文档-译 <span class="right">1 篇</span></a>
                 </a>
             </li>
 
@@ -241,127 +239,30 @@
 
     <main>
         <div class="container main-container">
-    <nav class="page-nav hide-on-small-only">
+    
+
+<nav class="page-nav hide-on-small-only">
     <div class="nav-wrapper indigo">
-        <span class="breadcrumb">当前位置（分类目录）</span>
-        
-            
-    
-    
-    <a class="breadcrumb" href="/categories/Android/">Android</a><a class="breadcrumb" href="/categories/Android/轮子/">轮子</a>
-
-
+        <span class="breadcrumb">当前位置（标签）</span>
         
 
+        
+            <a class="breadcrumb" href="/tags/翻译/">翻译</a>
         
     </div>
 </nav>
 
-<article>
-    <div class="card">
-        <div class="card-content">
-            
-
-            <div class="article-title">
-                
-    
-        <h1>我常用的Android第三方框架</h1>
-    
 
 
-            </div>
-            <time class="pink-link-context" datetime="2017-02-16T14:32:42.289Z"><a href="/2017/02/16/我常用的Android第三方开源框架/">2017-02-16</a></time>
-
-            <span id="busuanzi_container_page_pv" class="read-times-container">
-    <i class="fa fa-eye"></i>
-    <span id="busuanzi_value_page_pv"></span>
-</span>
-
-            
-    <div class="tags-row">
+    <div class="collection mt-0">
         
-            <a href="/tags/原创/" class="chip pink lighten-1">原创</a>
-        
-            <a href="/tags/Android/" class="chip pink lighten-1">Android</a>
-        
-            <a href="/tags/轮子/" class="chip pink lighten-1">轮子</a>
+            <a href="/2017/03/04/FileProvider/" class="collection-item grey-text text-darken-1">
+                <time datetime="2017-03-04T10:05:40.945Z">2017-03-04</time>
+                <span>&nbsp;&nbsp;&nbsp;</span>
+                FileProvider（译）
+            </a>
         
     </div>
-
-
-            <div class="toc pink-link-context hide-on-med-and-down">
-    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#1-Retrofit（网络）"><span class="section table-of-contents-text">1. Retrofit（网络）</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#2-butterknife（视图绑定）"><span class="section table-of-contents-text">2. butterknife（视图绑定）</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#3-glide（图片加载）"><span class="section table-of-contents-text">3. glide（图片加载）</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#4-realm-java（数据库）"><span class="section table-of-contents-text">4. realm-java（数据库）</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#5-leakcanary（内存检测）"><span class="section table-of-contents-text">5. leakcanary（内存检测）</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#6-permissionsdispatcher（动态权限）"><span class="section table-of-contents-text">6. permissionsdispatcher（动态权限）</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#7-BaseRecyclerViewAdapterHelper（RecyclerViewAdapter封装）"><span class="section table-of-contents-text">7. BaseRecyclerViewAdapterHelper（RecyclerViewAdapter封装）</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#8-CircleImageView（圆形图片）"><span class="section table-of-contents-text">8. CircleImageView（圆形图片）</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#9-zxing（二维码）"><span class="section table-of-contents-text">9. zxing（二维码）</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#10-MPAndroidChart（图表）"><span class="section table-of-contents-text">10. MPAndroidChart（图表）</span></a></li></ol>
-</div>
-
-
-            <div class="entry pink-link-context">
-                <p>前辈总是说：不要重复造轮子，居然这个问题已经有人很好地解决了，为什么不使用呢？</p>
-<a id="more"></a>
-<p><strong>转载请注明出处：<a href="http://www.facex.xyz" target="_blank" rel="external">www.facex.xyz</a>，如有发现错误或有其他更好的实现方式可与我联系。</strong></p>
-<p>以下是我常用的Android第三方框架。</p>
-<h3 id="1-Retrofit（网络）"><a href="#1-Retrofit（网络）" class="headerlink" title="1. Retrofit（网络）"></a>1. <a href="https://github.com/square/retrofit" target="_blank" rel="external">Retrofit</a>（网络）</h3><p>Type-safe HTTP client for Android and Java by Square, Inc.</p>
-<h3 id="2-butterknife（视图绑定）"><a href="#2-butterknife（视图绑定）" class="headerlink" title="2. butterknife（视图绑定）"></a>2. <a href="https://github.com/JakeWharton/butterknife" target="_blank" rel="external">butterknife</a>（视图绑定）</h3><p>Bind Android views and callbacks to fields and methods</p>
-<h3 id="3-glide（图片加载）"><a href="#3-glide（图片加载）" class="headerlink" title="3. glide（图片加载）"></a>3. <a href="https://github.com/bumptech/glide" target="_blank" rel="external">glide</a>（图片加载）</h3><p>An image loading and caching library for Android focused on smooth scrolling</p>
-<h3 id="4-realm-java（数据库）"><a href="#4-realm-java（数据库）" class="headerlink" title="4. realm-java（数据库）"></a>4. <a href="https://github.com/realm/realm-java" target="_blank" rel="external">realm-java</a>（数据库）</h3><p>Realm is a mobile database: a replacement for SQLite &amp; ORMs</p>
-<h3 id="5-leakcanary（内存检测）"><a href="#5-leakcanary（内存检测）" class="headerlink" title="5. leakcanary（内存检测）"></a>5. <a href="https://github.com/square/leakcanary" target="_blank" rel="external">leakcanary</a>（内存检测）</h3><p>A memory leak detection library for Android and Java</p>
-<h3 id="6-permissionsdispatcher（动态权限）"><a href="#6-permissionsdispatcher（动态权限）" class="headerlink" title="6. permissionsdispatcher（动态权限）"></a>6. <a href="https://github.com/hotchemi/PermissionsDispatcher" target="_blank" rel="external">permissionsdispatcher</a>（动态权限）</h3><p>Provides simple annotation-based API to handle runtime permissions.</p>
-<h3 id="7-BaseRecyclerViewAdapterHelper（RecyclerViewAdapter封装）"><a href="#7-BaseRecyclerViewAdapterHelper（RecyclerViewAdapter封装）" class="headerlink" title="7. BaseRecyclerViewAdapterHelper（RecyclerViewAdapter封装）"></a>7. <a href="https://github.com/CymChad/BaseRecyclerViewAdapterHelper" target="_blank" rel="external">BaseRecyclerViewAdapterHelper</a>（RecyclerViewAdapter封装）</h3><p>Powerful and flexible RecyclerAdapter</p>
-<h3 id="8-CircleImageView（圆形图片）"><a href="#8-CircleImageView（圆形图片）" class="headerlink" title="8. CircleImageView（圆形图片）"></a>8. <a href="https://github.com/hdodenhof/CircleImageView" target="_blank" rel="external">CircleImageView</a>（圆形图片）</h3><p>A circular ImageView for Android</p>
-<h3 id="9-zxing（二维码）"><a href="#9-zxing（二维码）" class="headerlink" title="9. zxing（二维码）"></a>9. <a href="https://github.com/zxing/zxing" target="_blank" rel="external">zxing</a>（二维码）</h3><p>ZXing (“zebra crossing”) is an open-source, multi-format 1D/2D barcode image processing library implemented in Java, with ports to other languages.</p>
-<h3 id="10-MPAndroidChart（图表）"><a href="#10-MPAndroidChart（图表）" class="headerlink" title="10. MPAndroidChart（图表）"></a>10. <a href="https://github.com/PhilJay/MPAndroidChart" target="_blank" rel="external">MPAndroidChart</a>（图表）</h3><p>A powerful Android chart view / graph view library, supporting line- bar- pie- radar- bubble- and candlestick charts as well as scaling, dragging and animations</p>
-
-                
-<p class="pink-link-context">
-    <a href="/2017/02/16/Java List对对碰/" rel="next" title="Java List对对碰">
-    上一篇：Java List对对碰
-  </a>
-</p>
-
-
-
-<p class="pink-link-context">
-    <a href="/2017/01/15/Git分支管理策略/" rel="next" title="Git分支管理策略">
-    下一篇：Git分支管理策略
-  </a>
-</p>
-
-
-            </div>
-			
-        </div>
-    </div>
-</article>
-
-
-
-
-    <section id="comment">
-        <div class="card">
-            <div class="card-content">
-                <!-- Duoshuo Comment BEGIN -->
-                <div class="ds-thread" data-thread-key="2017/02/16/我常用的Android第三方开源框架/" data-title="我常用的Android第三方框架" data-url="http://yoursite.com/2017/02/16/我常用的Android第三方开源框架/"></div>
-
-                <script type="text/javascript">
-                    console.log(document.querySelector('.ds-thread'));
-                    var duoshuoQuery = {
-                        short_name: 'facexxyz'
-                    };
-                    (function() {
-                        var ds = document.createElement('script');
-                        ds.type = 'text/javascript';
-                        ds.async = true;
-                        ds.src = (document.location.protocol == 'https:'
-                            ? 'https:'
-                            : 'http:') + '//static.duoshuo.com/embed.js';
-                        ds.charset = 'UTF-8';
-                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
-                    })();
-                </script>
-                <!-- Duoshuo Comment END -->
-            </div>
-        </div>
-    </section>
-
 
 
 </div>
