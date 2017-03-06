@@ -5,7 +5,7 @@
     
     <entry>
       <title><![CDATA[FileProvider（译）]]></title>
-      <url>http://yoursite.com/2017/03/04/FileProvider/</url>
+      <url>http://yoursite.com/2017/03/04/FileProvider%EF%BC%88%E8%AF%91%EF%BC%89/</url>
       <content type="html"><![CDATA[<p>FileProvider 是 <a href="https://developer.android.com/reference/android/content/ContentProvider.html" target="_blank" rel="external">ContentProvider</a> 的一个特殊子类，通过为一个文件创建一个 <code>content://</code> <a href="https://developer.android.com/reference/android/net/Uri.html" target="_blank" rel="external">Uri</a> 代替 <code>file:///</code> <a href="https://developer.android.com/reference/android/net/Uri.html" target="_blank" rel="external">Uri</a> 在 app 之间安全地共享文件。</p>
 <a id="more"></a>
 <blockquote>
