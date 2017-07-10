@@ -5,9 +5,12 @@
     
     <entry>
       <title><![CDATA[使用高德地图实现点平滑移动-优化版]]></title>
-      <url>http://yoursite.com/2017/06/06/%E4%BD%BF%E7%94%A8%E9%AB%98%E5%BE%B7%E5%9C%B0%E5%9B%BE%E5%AE%9E%E7%8E%B0%E7%82%B9%E5%B9%B3%E6%BB%91%E7%A7%BB%E5%8A%A8-%E4%BC%98%E5%8C%96%E7%89%88/</url>
+      <url>http://yoursite.com/2017/07/05/%E4%BD%BF%E7%94%A8%E9%AB%98%E5%BE%B7%E5%9C%B0%E5%9B%BE%E5%AE%9E%E7%8E%B0%E7%82%B9%E5%B9%B3%E6%BB%91%E7%A7%BB%E5%8A%A8-%E4%BC%98%E5%8C%96%E7%89%88/</url>
       <content type="html"><![CDATA[<p>高德地图中有可供调用的 <strong> 点平滑移动 </strong> 的 API，但是功能相对简单，不足以满足项目需求。<br>故多方寻求方案，未果！只能自己动手实现，现在贴出来和大家一起分享。<br><a id="more"></a></p>
 <p><strong> 转载请注明出处：<a href="http://www.facex.xyz" target="_blank" rel="external">www.facex.xyz</a>，如有发现错误或有其他更好的实现方式可与我联系。</strong></p>
+<blockquote>
+<p>首先声明，通过本文不一定能解决你所面临的问题，关键在于理解其实现原理，尤其是第3点：高德官方点平滑移动API实现过程。</p>
+</blockquote>
 <h3 id="1-原有方案介绍"><a href="#1-原有方案介绍" class="headerlink" title="1. 原有方案介绍"></a>1. 原有方案介绍</h3><p>之前有写过一篇 <a href="http://facex.xyz/2016/12/14/%E4%BD%BF%E7%94%A8%E9%AB%98%E5%BE%B7%E5%9C%B0%E5%9B%BE%E6%A8%A1%E6%8B%9F%E8%BF%90%E5%8A%A8%E8%BD%A8%E8%BF%B9/" target="_blank" rel="external">使用高德地图模拟运动轨迹</a>, 介绍了使用高德地图的点平滑移动 API 来实现模拟运动轨迹，但是存在几个问题：</p>
 <ol>
 <li>一旦设置了动画时间并开始动画，只有停止选项，然后就没有然后了。</li>
@@ -22,10 +25,8 @@
 </ol>
 <p>下面开始我的分享：</p>
 <h3 id="3-高德官方点平滑移动API实现过程"><a href="#3-高德官方点平滑移动API实现过程" class="headerlink" title="3. 高德官方点平滑移动API实现过程"></a>3. 高德官方点平滑移动API实现过程</h3><p>高德地图开源了点平滑移动 API 的技术实现, 我的优化也是建立在此基础之上的。</p>
-<blockquote>
 <p>开源地址：<a href="https://github.com/amap-demo/android-smooth-move" target="_blank" rel="external">android-smooth-move</a></p>
 <p>文档地址：<a href="https://lbs.amap.com/api/android-sdk/guide/draw-on-map/smooth-move" target="_blank" rel="external">点平滑移动</a></p>
-</blockquote>
 <p>我大概分析下其实现过程：</p>
 <ol>
 <li>计算轨迹经纬度数组每两个点的距离</li>
@@ -55,7 +56,7 @@
     
     <entry>
       <title><![CDATA[FileProvider（译）]]></title>
-      <url>http://yoursite.com/2017/03/04/FileProvider%EF%BC%88%E8%AF%91%EF%BC%89/</url>
+      <url>http://yoursite.com/2017/03/06/FileProvider%EF%BC%88%E8%AF%91%EF%BC%89/</url>
       <content type="html"><![CDATA[<p>FileProvider 是 <a href="https://developer.android.com/reference/android/content/ContentProvider.html" target="_blank" rel="external">ContentProvider</a> 的一个特殊子类，通过为一个文件创建一个 <code>content://</code> <a href="https://developer.android.com/reference/android/net/Uri.html" target="_blank" rel="external">Uri</a> 代替 <code>file:///</code> <a href="https://developer.android.com/reference/android/net/Uri.html" target="_blank" rel="external">Uri</a> 在 app 之间安全地共享文件。</p>
 <a id="more"></a>
 <blockquote>
@@ -113,7 +114,7 @@
     
     <entry>
       <title><![CDATA[Git分支管理策略]]></title>
-      <url>http://yoursite.com/2017/01/15/Git%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86%E7%AD%96%E7%95%A5/</url>
+      <url>http://yoursite.com/2017/01/19/Git%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86%E7%AD%96%E7%95%A5/</url>
       <content type="html"><![CDATA[<p>如果你严肃对待编程，就必定会使用<a href="http://www.ruanyifeng.com/blog/2008/12/a_visual_guide_to_version_control.html" target="_blank" rel="external">“版本管理系统”</a>（Version Control System）。眼下最流行的”版本管理系统”，非<a href="https://git-scm.com/" target="_blank" rel="external">Git</a>莫属。</p>
 <a id="more"></a>
 <blockquote>
@@ -224,52 +225,6 @@
 <h3 id="7-总结"><a href="#7-总结" class="headerlink" title="7. 总结"></a>7. 总结</h3><p>通过以上步骤可以较好的实现需求，以上只是简单的记录实现步骤，具体的细节美化可以按照各自的需求处理。<br>项目 Demo：<a href="https://github.com/facexxyz/ImitateRunning。" target="_blank" rel="external">https://github.com/facexxyz/ImitateRunning。</a><br>项目 APK:<a href="https://www.pgyer.com/ImitateRunning" target="_blank" rel="external">https://www.pgyer.com/ImitateRunning</a></p>
 <blockquote>
 <p>参考文献：<a href="http://lbs.amap.com/api/android-sdk/guide/draw-on-map/smooth-move/" target="_blank" rel="external">高德地图点平滑移动api</a></p>
-</blockquote>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[设计模式之策略模式]]></title>
-      <url>http://yoursite.com/2016/12/05/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/</url>
-      <content type="html"><![CDATA[<p>项目中遇到这样的一个需求：分别需要对发送的数据和接受的数据做编码和解码处理，且不同的设备编码和解码方式不同。一般写法是根据不同的设备选择相应的编码和解码方式。但是这种方法耦合性高，不易维护，增加设备的支持就需要修改原先的代码，这容易在原本正确的代码中引入新的错误，这也违背了开闭原则。对于这种情况，一种较好的解决方式就是策略模式。</p>
-<a id="more"></a>
-<p><strong>转载请注明出处：<a href="http://www.facex.xyz" target="_blank" rel="external">www.facex.xyz</a>，如有发现错误或有其他更好的实现方式可与我联系。</strong></p>
-<blockquote>
-<p>开闭原则：软件中的对象（类、模块、函数等）应该对于扩展是开放的，但是对于修改是封闭的。</p>
-</blockquote>
-<h3 id="1-策略模式的定义"><a href="#1-策略模式的定义" class="headerlink" title="1. 策略模式的定义"></a>1. 策略模式的定义</h3><p>策略模式定义了一系列算法，并将每一个算法封装起来，而且使它们还可以相互替换。策略模式让算法独立于使用它的客户而存在。</p>
-<h3 id="2-策略模式的使用场景"><a href="#2-策略模式的使用场景" class="headerlink" title="2. 策略模式的使用场景"></a>2. 策略模式的使用场景</h3><ul>
-<li>针对同一问题的多种处理方式，仅仅是具体行为有差别时。</li>
-<li>需要安全的封装多种同一类型的操作时。</li>
-<li>出现同一抽象类有多个子类，而又需要使用if-else或者switch-case来选择具体子类时。</li>
-</ul>
-<h3 id="4-UML类图"><a href="#4-UML类图" class="headerlink" title="4. UML类图"></a>4. UML类图</h3><p><img src="http://ohnwilkou.bkt.clouddn.com/pattern_strategy.jpg" alt="策略模式"></p>
-<hr>
-<h3 id="5-重构步骤"><a href="#5-重构步骤" class="headerlink" title="5. 重构步骤"></a>5. 重构步骤</h3><ol>
-<li><p>首先定义设备解码编码策略接口类：DeviceCodecStrategy，类中定义decode和encode两个虚拟方法。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">DeviceCodecStrategy</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * Author: www.facex.xyz</div><div class="line">     * 解码</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">decode</span><span class="params">(<span class="keyword">int</span> data)</span></span>;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * Author: www.facex.xyz</div><div class="line">     * 编码</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">encode</span><span class="params">(<span class="keyword">int</span> data)</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>定义设备A编码解码策略实现类：DeviceAStrategy，该类实现DeviceCodecStrategy接口。</p>
- <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DeviceAStrategy</span> <span class="keyword">implements</span> <span class="title">DeviceCodecStrategy</span> </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">decode</span><span class="params">(<span class="keyword">int</span> data)</span> </span>&#123;</div><div class="line">      <span class="comment">/**</span></div><div class="line">       * Author: www.facex.xyz</div><div class="line">       * 设备A解码相关方法，这里将需要解码的信息-1</div><div class="line">       */</div><div class="line">        <span class="keyword">return</span> data - <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">encode</span><span class="params">(<span class="keyword">int</span> data)</span> </span>&#123;</div><div class="line">        <span class="comment">/**</span></div><div class="line">         * Author: www.facex.xyz</div><div class="line">         * 设备A编码相关方法，这里将需要解码的信息+1</div><div class="line">         */</div><div class="line">        <span class="keyword">return</span> data + <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>定义角色类：DeviceCodec</p>
- <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DeviceCodec</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> DeviceCodecStrategy mStrategy;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setStrategy</span><span class="params">(DeviceCodecStrategy strategy)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.mStrategy = strategy;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">decode</span><span class="params">(<span class="keyword">int</span> data)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> mStrategy.decode(data);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">encode</span><span class="params">(<span class="keyword">int</span> data)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> mStrategy.encode(data);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>使用策略模式</p>
- <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">    DeviceCodec deviceCodec = <span class="keyword">new</span> DeviceCodec();</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * Author: www.facex.xyz</div><div class="line">     * 设置解码编码策略</div><div class="line">     */</div><div class="line">    deviceCodec.setStrategy(<span class="keyword">new</span> DeviceAStrategy());</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * Author: www.facex.xyz</div><div class="line">     * 编码</div><div class="line">     */</div><div class="line">    System.out.println(<span class="string">"设备A编码后："</span> + deviceCodec.encode(<span class="number">10</span>));</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * Author: www.facex.xyz</div><div class="line">     * 解码</div><div class="line">     */</div><div class="line">    System.out.println(<span class="string">"设备A解码后："</span> + deviceCodec.decode(<span class="number">10</span>));</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
-<p> 输出结果如下，符合预期：</p>
-<blockquote>
-<p>设备A编码后：11</p>
-<p>设备A解码后：9</p>
-</blockquote>
-</li>
-<li><p>现在我们要支持新的DeviceB设备，同DeviceA，定义设备B编码解码策略实现类：DeviceBStrategy，实现DeviceCodecStrategy接口，使用方式同DeviceA。</p>
- <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DeviceBStrategy</span> <span class="keyword">implements</span> <span class="title">DeviceCodecStrategy</span> </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">decode</span><span class="params">(<span class="keyword">int</span> data)</span> </span>&#123;</div><div class="line">      <span class="comment">/**</span></div><div class="line">       * Author: www.facex.xyz</div><div class="line">       * 设备B解码相关方法，这里将需要解码的信息-2</div><div class="line">       */</div><div class="line">        <span class="keyword">return</span> data - <span class="number">2</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">encode</span><span class="params">(<span class="keyword">int</span> data)</span> </span>&#123;</div><div class="line">      <span class="comment">/**</span></div><div class="line">       * Author: www.facex.xyz</div><div class="line">       * 设备B编码相关方法，这里将需要解码的信息+2</div><div class="line">       */</div><div class="line">        <span class="keyword">return</span> data + <span class="number">2</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<h3 id="6-总结"><a href="#6-总结" class="headerlink" title="6. 总结"></a>6. 总结</h3><p>使用策略模式重构代码后，隐藏了编码解码实现，同时可扩展性变强。以后新增加设备只需要实现DeviceCodecStrategy接口，重现decode和encode方法即可，不仅符合了开闭原则，而且逻辑性更强。</p>
-<blockquote>
-<p>参考文献：《Android源码设计模式解析与实战》</p>
 </blockquote>
 ]]></content>
     </entry>

@@ -161,16 +161,16 @@
         
 
             <li class="collapse-level-1" collapse-level="1">
-                <a class="no-padding" href="/categories/Android/地图/">
-                    地图 <span class="right">2 篇</span></a>
+                <a class="no-padding" href="/categories/Android/官方文档-译/">
+                    官方文档-译 <span class="right">1 篇</span></a>
                 </a>
             </li>
 
         
 
             <li class="collapse-level-1" collapse-level="1">
-                <a class="no-padding" href="/categories/Android/官方文档-译/">
-                    官方文档-译 <span class="right">1 篇</span></a>
+                <a class="no-padding" href="/categories/Android/地图/">
+                    地图 <span class="right">2 篇</span></a>
                 </a>
             </li>
 
@@ -187,22 +187,6 @@
             <li class="collapse-level-0" collapse-level="0">
                 <a class="no-padding" href="/categories/工具/">
                     工具 <span class="right">1 篇</span></a>
-                </a>
-            </li>
-
-        
-
-            <li class="collapse-level-0" collapse-level="0">
-                <a class="no-padding" href="/categories/Java/">
-                    Java <span class="right">1 篇</span></a>
-                </a>
-            </li>
-
-        
-
-            <li class="collapse-level-1" collapse-level="1">
-                <a class="no-padding" href="/categories/Java/设计模式/">
-                    设计模式 <span class="right">1 篇</span></a>
                 </a>
             </li>
 
@@ -248,28 +232,22 @@
 
     <div class="collection mt-0">
         
-            <a href="/2017/06/06/使用高德地图实现点平滑移动-优化版/" class="collection-item grey-text text-darken-1">
-                <time datetime="2017-06-06T13:22:13.638Z">2017-06-06</time>
+            <a href="/2017/07/05/使用高德地图实现点平滑移动-优化版/" class="collection-item grey-text text-darken-1">
+                <time datetime="2017-07-04T16:00:00.000Z">2017-07-05</time>
                 <span>&nbsp;&nbsp;&nbsp;</span>
                 使用高德地图实现点平滑移动-优化版
             </a>
         
             <a href="/2016/12/26/你应该知道的BuildConfig/" class="collection-item grey-text text-darken-1">
-                <time datetime="2016-12-26T12:58:53.754Z">2016-12-26</time>
+                <time datetime="2016-12-25T16:00:00.000Z">2016-12-26</time>
                 <span>&nbsp;&nbsp;&nbsp;</span>
                 你应该知道的BuildConfig
             </a>
         
             <a href="/2016/12/14/使用高德地图模拟运动轨迹/" class="collection-item grey-text text-darken-1">
-                <time datetime="2016-12-14T14:03:11.740Z">2016-12-14</time>
+                <time datetime="2016-12-13T16:00:00.000Z">2016-12-14</time>
                 <span>&nbsp;&nbsp;&nbsp;</span>
                 使用高德地图模拟运动轨迹
-            </a>
-        
-            <a href="/2016/12/05/设计模式之策略模式/" class="collection-item grey-text text-darken-1">
-                <time datetime="2016-12-05T13:30:35.871Z">2016-12-05</time>
-                <span>&nbsp;&nbsp;&nbsp;</span>
-                设计模式之策略模式
             </a>
         
     </div>
@@ -283,14 +261,14 @@
     </a>
     <ul>
       <li><a class="btn-return-top btn-floating waves-effect green" title="回到顶部"><i class="fa fa-arrow-circle-o-up"></i></a></li>
-      <li><a class="btn-floating waves-effect button-collapse yellow darken-1"  data-activates="main-menu" title="menu"><i class="fa fa-navicon"></i></a></li>
+      <li><a class="btn-floating waves-effect button-collapse yellow darken-1"  data-activates="main-menu" title="菜单"><i class="fa fa-navicon"></i></a></li>
     </ul>
   </div>
 
     </main>
     <footer class="page-footer indigo darken-1">
     
-    <div class="container">
+    <div class="footer-container container">
         <div class="row">
             
             <div class="social-group col m4 s12">
@@ -304,17 +282,22 @@
                         <i class="fa fa-2x fa-github"></i>
                     </a>
                 
-                <div class="site-visitors-container white-text">
-                    <span>
-                        <i class="fa fa-user"></i>
-                        <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
-                    </span>
-                    <span>&nbsp;|&nbsp;</span>
-                    <span>
-                        <i class="fa fa-eye"></i>
-                        <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
-                    </span>
-                </div>
+                
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    <div class="site-visitors-container white-text">
+        <span>
+            <i class="fa fa-user"></i>
+            <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+        </span>
+        <span>&nbsp;|&nbsp;</span>
+        <span>
+            <i class="fa fa-eye"></i>
+            <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+        </span>
+    </div>
+
+
             </div>
             
 
@@ -351,8 +334,6 @@
 
 <script src="/js/jquery.min.js"></script>
 <script src="/js/materialize.min.js"></script>
-<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
-</script>
 
 <script>
     (function($) {
@@ -394,6 +375,22 @@
 
             // 文章目录
             $('article').not('.simple-article').find('h1').add('h2').add('h3').add('h4').add('h5').add('h6').scrollSpy();
+
+            // 目录随屏幕滚动（防止目录过长越过footer）
+            var $toc = $('.toc');
+            var scrollTargetTop = 0;
+            $(window).scroll(function() {
+                var $activeLink = $toc.find('a.active.section');
+                if ($(window).scrollTop() < 100) {
+                    scrollTargetTop = 0;
+                } else {
+                    if ($activeLink[0]) {
+                        scrollTargetTop = $activeLink.offset().top - $toc.offset().top;
+                    }
+                }
+                $toc.css('top', '-' + scrollTargetTop + 'px');
+            });
+
             // 修正文章目录的left-border颜色
             var color = $('.table-of-contents-text').css('color');
             $('.table-of-contents-link').css('border-left-color', color);
