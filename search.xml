@@ -5,7 +5,7 @@
     
     <entry>
       <title><![CDATA[使用高德地图实现点平滑移动-优化版]]></title>
-      <url>http://yoursite.com/2017/07/05/%E4%BD%BF%E7%94%A8%E9%AB%98%E5%BE%B7%E5%9C%B0%E5%9B%BE%E5%AE%9E%E7%8E%B0%E7%82%B9%E5%B9%B3%E6%BB%91%E7%A7%BB%E5%8A%A8-%E4%BC%98%E5%8C%96%E7%89%88/</url>
+      <url>http://yoursite.com/2017/06/06/%E4%BD%BF%E7%94%A8%E9%AB%98%E5%BE%B7%E5%9C%B0%E5%9B%BE%E5%AE%9E%E7%8E%B0%E7%82%B9%E5%B9%B3%E6%BB%91%E7%A7%BB%E5%8A%A8-%E4%BC%98%E5%8C%96%E7%89%88/</url>
       <content type="html"><![CDATA[<p>高德地图中有可供调用的 <strong> 点平滑移动 </strong> 的 API，但是功能相对简单，不足以满足项目需求。<br>故多方寻求方案，未果！只能自己动手实现，现在贴出来和大家一起分享。<br><a id="more"></a></p>
 <p><strong> 转载请注明出处：<a href="http://www.facex.xyz" target="_blank" rel="external">www.facex.xyz</a>，如有发现错误或有其他更好的实现方式可与我联系。</strong></p>
 <blockquote>

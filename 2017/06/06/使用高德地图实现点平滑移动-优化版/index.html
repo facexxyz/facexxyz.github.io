@@ -163,8 +163,8 @@
         
 
             <li class="collapse-level-1" collapse-level="1">
-                <a class="no-padding" href="/categories/Android/地图/">
-                    地图 <span class="right">2 篇</span></a>
+                <a class="no-padding" href="/categories/Android/小技巧/">
+                    小技巧 <span class="right">1 篇</span></a>
                 </a>
             </li>
 
@@ -179,8 +179,8 @@
         
 
             <li class="collapse-level-1" collapse-level="1">
-                <a class="no-padding" href="/categories/Android/小技巧/">
-                    小技巧 <span class="right">1 篇</span></a>
+                <a class="no-padding" href="/categories/Android/地图/">
+                    地图 <span class="right">2 篇</span></a>
                 </a>
             </li>
 
@@ -189,22 +189,6 @@
             <li class="collapse-level-0" collapse-level="0">
                 <a class="no-padding" href="/categories/工具/">
                     工具 <span class="right">1 篇</span></a>
-                </a>
-            </li>
-
-        
-
-            <li class="collapse-level-0" collapse-level="0">
-                <a class="no-padding" href="/categories/Java/">
-                    Java <span class="right">1 篇</span></a>
-                </a>
-            </li>
-
-        
-
-            <li class="collapse-level-1" collapse-level="1">
-                <a class="no-padding" href="/categories/Java/设计模式/">
-                    设计模式 <span class="right">1 篇</span></a>
                 </a>
             </li>
 
@@ -262,7 +246,7 @@
 
 
             </div>
-            <time class="pink-link-context" datetime="2017-06-06T13:22:13.638Z"><a href="/2017/06/06/使用高德地图实现点平滑移动-优化版/">2017-06-06</a></time>
+            <time class="pink-link-context" datetime="2017-06-05T16:00:00.000Z"><a href="/2017/06/06/使用高德地图实现点平滑移动-优化版/">2017-06-06</a></time>
 
             <span id="busuanzi_container_page_pv" class="read-times-container">
     <i class="fa fa-eye"></i>
@@ -289,6 +273,9 @@
             <div class="entry pink-link-context">
                 <p>高德地图中有可供调用的 <strong> 点平滑移动 </strong> 的 API，但是功能相对简单，不足以满足项目需求。<br>故多方寻求方案，未果！只能自己动手实现，现在贴出来和大家一起分享。<br><a id="more"></a></p>
 <p><strong> 转载请注明出处：<a href="http://www.facex.xyz" target="_blank" rel="external">www.facex.xyz</a>，如有发现错误或有其他更好的实现方式可与我联系。</strong></p>
+<blockquote>
+<p>首先声明，通过本文不一定能解决你所面临的问题，关键在于理解其实现原理，尤其是第3点：高德官方点平滑移动API实现过程。</p>
+</blockquote>
 <h3 id="1-原有方案介绍"><a href="#1-原有方案介绍" class="headerlink" title="1. 原有方案介绍"></a>1. 原有方案介绍</h3><p>之前有写过一篇 <a href="http://facex.xyz/2016/12/14/%E4%BD%BF%E7%94%A8%E9%AB%98%E5%BE%B7%E5%9C%B0%E5%9B%BE%E6%A8%A1%E6%8B%9F%E8%BF%90%E5%8A%A8%E8%BD%A8%E8%BF%B9/" target="_blank" rel="external">使用高德地图模拟运动轨迹</a>, 介绍了使用高德地图的点平滑移动 API 来实现模拟运动轨迹，但是存在几个问题：</p>
 <ol>
 <li>一旦设置了动画时间并开始动画，只有停止选项，然后就没有然后了。</li>
@@ -303,10 +290,8 @@
 </ol>
 <p>下面开始我的分享：</p>
 <h3 id="3-高德官方点平滑移动API实现过程"><a href="#3-高德官方点平滑移动API实现过程" class="headerlink" title="3. 高德官方点平滑移动API实现过程"></a>3. 高德官方点平滑移动API实现过程</h3><p>高德地图开源了点平滑移动 API 的技术实现, 我的优化也是建立在此基础之上的。</p>
-<blockquote>
 <p>开源地址：<a href="https://github.com/amap-demo/android-smooth-move" target="_blank" rel="external">android-smooth-move</a></p>
 <p>文档地址：<a href="https://lbs.amap.com/api/android-sdk/guide/draw-on-map/smooth-move" target="_blank" rel="external">点平滑移动</a></p>
-</blockquote>
 <p>我大概分析下其实现过程：</p>
 <ol>
 <li>计算轨迹经纬度数组每两个点的距离</li>
@@ -336,7 +321,7 @@
 
 
 <p class="pink-link-context">
-    <a href="/2017/03/04/FileProvider（译）/" rel="next" title="FileProvider（译）">
+    <a href="/2017/03/06/FileProvider（译）/" rel="next" title="FileProvider（译）">
     下一篇：FileProvider（译）
   </a>
 </p>
@@ -351,33 +336,6 @@
 
 
 
-    <section id="comment">
-        <div class="card">
-            <div class="card-content">
-                <!-- Duoshuo Comment BEGIN -->
-                <div class="ds-thread" data-thread-key="2017/06/06/使用高德地图实现点平滑移动-优化版/" data-title="使用高德地图实现点平滑移动-优化版" data-url="http://yoursite.com/2017/06/06/使用高德地图实现点平滑移动-优化版/"></div>
-
-                <script type="text/javascript">
-                    console.log(document.querySelector('.ds-thread'));
-                    var duoshuoQuery = {
-                        short_name: 'facexxyz'
-                    };
-                    (function() {
-                        var ds = document.createElement('script');
-                        ds.type = 'text/javascript';
-                        ds.async = true;
-                        ds.src = (document.location.protocol == 'https:'
-                            ? 'https:'
-                            : 'http:') + '//static.duoshuo.com/embed.js';
-                        ds.charset = 'UTF-8';
-                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
-                    })();
-                </script>
-                <!-- Duoshuo Comment END -->
-            </div>
-        </div>
-    </section>
-
 
 
 </div>
@@ -388,14 +346,14 @@
     </a>
     <ul>
       <li><a class="btn-return-top btn-floating waves-effect green" title="回到顶部"><i class="fa fa-arrow-circle-o-up"></i></a></li>
-      <li><a class="btn-floating waves-effect button-collapse yellow darken-1"  data-activates="main-menu" title="menu"><i class="fa fa-navicon"></i></a></li>
+      <li><a class="btn-floating waves-effect button-collapse yellow darken-1"  data-activates="main-menu" title="菜单"><i class="fa fa-navicon"></i></a></li>
     </ul>
   </div>
 
     </main>
     <footer class="page-footer indigo darken-1">
     
-    <div class="container">
+    <div class="footer-container container">
         <div class="row">
             
             <div class="social-group col m4 s12">
@@ -409,17 +367,22 @@
                         <i class="fa fa-2x fa-github"></i>
                     </a>
                 
-                <div class="site-visitors-container white-text">
-                    <span>
-                        <i class="fa fa-user"></i>
-                        <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
-                    </span>
-                    <span>&nbsp;|&nbsp;</span>
-                    <span>
-                        <i class="fa fa-eye"></i>
-                        <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
-                    </span>
-                </div>
+                
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    <div class="site-visitors-container white-text">
+        <span>
+            <i class="fa fa-user"></i>
+            <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+        </span>
+        <span>&nbsp;|&nbsp;</span>
+        <span>
+            <i class="fa fa-eye"></i>
+            <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+        </span>
+    </div>
+
+
             </div>
             
 
@@ -456,8 +419,6 @@
 
 <script src="/js/jquery.min.js"></script>
 <script src="/js/materialize.min.js"></script>
-<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
-</script>
 
 <script>
     (function($) {
@@ -499,6 +460,22 @@
 
             // 文章目录
             $('article').not('.simple-article').find('h1').add('h2').add('h3').add('h4').add('h5').add('h6').scrollSpy();
+
+            // 目录随屏幕滚动（防止目录过长越过footer）
+            var $toc = $('.toc');
+            var scrollTargetTop = 0;
+            $(window).scroll(function() {
+                var $activeLink = $toc.find('a.active.section');
+                if ($(window).scrollTop() < 100) {
+                    scrollTargetTop = 0;
+                } else {
+                    if ($activeLink[0]) {
+                        scrollTargetTop = $activeLink.offset().top - $toc.offset().top;
+                    }
+                }
+                $toc.css('top', '-' + scrollTargetTop + 'px');
+            });
+
             // 修正文章目录的left-border颜色
             var color = $('.table-of-contents-text').css('color');
             $('.table-of-contents-link').css('border-left-color', color);
