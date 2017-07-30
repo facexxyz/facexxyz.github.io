@@ -4,6 +4,44 @@
   
     
     <entry>
+      <title><![CDATA[在 IntelliJ IDEA 中创建 Spring boot 项目]]></title>
+      <url>http://yoursite.com/2017/07/30/spring-boot-init/</url>
+      <content type="html"><![CDATA[<p>IntelliJ IDEA 作为最流行的 java IDE 之一，为我们提供了极为简便的创建 Spring boot 的途径。</p>
+<a id="more"></a>
+<p><strong> 转载请注明出处：<a href="http://www.facex.xyz" target="_blank" rel="external">www.facex.xyz</a>，您可前往 <a href="https://github.com/facexxyz/BlogDiscuss" target="_blank" rel="external">BlogDiscuss</a> 对本文进行评论 </strong></p>
+<p>环境需求：<a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html" target="_blank" rel="external">JDK 1.8</a> 或更高</p>
+<ol>
+<li>IntelliJ IDEA 中 New Project, 选择 Spring Initializr</li>
+</ol>
+<p><img src="http://otwhyxhhg.bkt.clouddn.com/spring-boot-init-1.png" alt=""></p>
+<ol>
+<li>我选择 Gradle 作为项目依赖</li>
+</ol>
+<p><img src="http://otwhyxhhg.bkt.clouddn.com/spring-boot-init-2.png" alt=""></p>
+<ol>
+<li>作为入门项目，只勾选 Web 下的 web 就可以了</li>
+</ol>
+<p><img src="http://otwhyxhhg.bkt.clouddn.com/spring-boot-init-3.png" alt=""></p>
+<ol>
+<li>然后一路 Next，一个 Spring boot 项目就创建好了，项目结构如下图</li>
+</ol>
+<p><img src="http://otwhyxhhg.bkt.clouddn.com/spring-boot-init-4.png" alt=""></p>
+<p>按照国际惯例，我们编写一个 “hello world” 作为 Spring boot 的入门，新建 <code>HelloController.java</code> 文件，代码如下：</p>
+<p><code>HelloController.java</code><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> xyz.facex.practice;</div><div class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.GetMapping;</div><div class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RestController;</div><div class="line"><span class="meta">@RestController</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloController</span> </span>&#123;</div><div class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/hello"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">helloWorld</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">"Hello World!"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>本文只介绍如何创建一个可运行的 Spring boot 项目，上面代码的含义，不在本文讲解。</p>
+</blockquote>
+<ol>
+<li><p>运行项目，在弹出的 console 中可以看到 “Tomcat started on port(s): 8080 (http)”，说明项目已经成功运行。</p>
+</li>
+<li><p>在浏览器中输入 <a href="http://localhost:8080/hello" target="_blank" rel="external">http://localhost:8080/hello</a> ，可以看到如下的页面。</p>
+</li>
+</ol>
+<p><img src="http://otwhyxhhg.bkt.clouddn.com/spring-boot-init-5.png" alt=""></p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[使用高德地图实现点平滑移动-优化版]]></title>
       <url>http://yoursite.com/2017/06/06/%E4%BD%BF%E7%94%A8%E9%AB%98%E5%BE%B7%E5%9C%B0%E5%9B%BE%E5%AE%9E%E7%8E%B0%E7%82%B9%E5%B9%B3%E6%BB%91%E7%A7%BB%E5%8A%A8-%E4%BC%98%E5%8C%96%E7%89%88/</url>
       <content type="html"><![CDATA[<p>高德地图中有可供调用的 <strong> 点平滑移动 </strong> 的 API，但是功能相对简单，不足以满足项目需求。<br>故多方寻求方案，未果！只能自己动手实现，现在贴出来和大家一起分享。<br><a id="more"></a></p>
